@@ -25,9 +25,9 @@ var randomCmd = &cobra.Command{
 }
 
 type Joke struct {
-	ID     string `json:"id"`
-	Joke   string `json:"joke"`
-	Status int    `json:"status"`
+	ID      string `json:"id"`
+	Content string `json:"joke"`
+	Status  int    `json:"status"`
 }
 
 func init() {
@@ -44,7 +44,7 @@ func getRandomJoke() {
 		fmt.Printf("Error parsing JSON: %v\n", err)
 	}
 
-	fmt.Println(string(joke.Joke))
+	fmt.Println(string(joke.Content))
 }
 
 func getJokeData(baseURL string) []byte {
