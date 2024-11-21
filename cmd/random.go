@@ -16,19 +16,21 @@ var randomCmd = &cobra.Command{
 	Long:  `Command 'random' gives you a random joke in the terminal.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("random called")
+		getRandomJoke()
 	},
+}
+
+type Joke struct {
+	ID     string `json:"id"`
+	Joke   string `json:"joke"`
+	Status int    `json:"status"`
 }
 
 func init() {
 	rootCmd.AddCommand(randomCmd)
 
-	// Here you will define your flags and configuration settings.
+}
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// randomCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// randomCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func getRandomJoke() {
+	fmt.Println("Getting random joke for sami...")
 }
