@@ -5,6 +5,8 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
 
 	"github.com/spf13/cobra"
 )
@@ -33,4 +35,30 @@ func init() {
 
 func getRandomJoke() {
 	fmt.Println("Getting random joke for sami...")
+}
+
+func getJoke(baseURL string) []byte {
+	request, err := http.NewRequest(
+		http.MethodGet,
+		baseURL,
+		nil,
+	)
+	if err != nil {
+		fmt.Printf("Error creating request: %v\n", err)
+	}
+
+	request.Header.Add("Accept", "application/json")
+	request.Header.Add("User-Agent", "samiCLI")
+
+	response, err := http.DefaultClient.Do(request)
+	if err != nil {
+		fmt.Printf("Error sending request: %v\n", err)
+	}
+
+	responseBytes, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		fmt.Printf("Error reading response: %v\n", err)
+	}
+
+	return responseBytes
 }
