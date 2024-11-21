@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -17,8 +18,9 @@ var randomCmd = &cobra.Command{
 	Short: "Returns a random joke",
 	Long:  `Command 'random' gives you a random joke in the terminal.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("random called")
+		fmt.Println()
 		getRandomJoke()
+		fmt.Println()
 	},
 }
 
@@ -34,10 +36,18 @@ func init() {
 }
 
 func getRandomJoke() {
-	fmt.Println("Getting random joke for sami...")
+	url := "https://icanhazdadjoke.com/"
+	responseBytes := getJokeData(url)
+
+	var joke Joke
+	if err := json.Unmarshal(responseBytes, &joke); err != nil {
+		fmt.Printf("Error parsing JSON: %v\n", err)
+	}
+
+	fmt.Println(string(joke.Joke))
 }
 
-func getJoke(baseURL string) []byte {
+func getJokeData(baseURL string) []byte {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		baseURL,
