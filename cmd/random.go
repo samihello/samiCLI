@@ -6,7 +6,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/spf13/cobra"
@@ -65,7 +65,7 @@ func getJokeData(baseURL string) []byte {
 		fmt.Printf("Error sending request: %v\n", err)
 	}
 
-	responseBytes, err := ioutil.ReadAll(response.Body)
+	responseBytes, err := io.ReadAll(response.Body)
 	if err != nil {
 		fmt.Printf("Error reading response: %v\n", err)
 	}
