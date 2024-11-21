@@ -11,9 +11,11 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "jokescli",
+	Use:   "samiCLI",
 	Short: "Get random jokes in your terminal",
-	Long:  `JokesCLI is a tool that gives you random jokes directly in the termina. For example:`,
+	Long: `samiCLI is a tool that gives you random jokes directly in the terminal.
+	
+	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
