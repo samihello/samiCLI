@@ -9,14 +9,14 @@ import (
 
 func main() {
 	// calculate the SHA hash of file in api/docs.yaml
-	filePathAfter := "/Users/rwv/Documents/samiCLI/api/docs.yaml"
+	filePathAfter := "../api/docs.yaml"
 	hashAfter, err := calculateFileHash(filePathAfter)
 	if err != nil {
 		log.Fatalf("Failed to calculate hash: %v", err)
 	}
 
 	// calculate the SHA hash of file in root docs.yaml
-	filePathBefore := "/Users/rwv/Documents/samiCLI/docs.yaml"
+	filePathBefore := "../docs.yaml"
 	hashBefore, err := calculateFileHash(filePathBefore)
 	if err != nil {
 		log.Fatalf("Failed to calculate hash: %v", err)
