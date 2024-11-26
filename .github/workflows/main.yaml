@@ -1,4 +1,4 @@
-name: run api docs build script
+name: check if API specification is up-to-date
 
 on:
   merge_group:
@@ -12,15 +12,13 @@ on:
       - "main"
 
 jobs:
-  compile-and-bundle:
+  compare-api-specifications:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: scripts/
+        working-directory:  .
     steps:
       - name: Check out the repository to the runner
         uses: actions/checkout@v4
-      - name: Compile and bundle API specifications
-        run: go run build.go
-      - name: Check for changes in API specifications
-        run: go run compare.go
+      - name: Check for changes in API specification
+        run: make build-api
