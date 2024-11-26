@@ -14,10 +14,9 @@ import (
 
 // randomCmd represents the random command
 var randomCmd = &cobra.Command{
-	Use:     "random",
-	Aliases: []string{"r"},
-	Short:   "Returns a random joke",
-	Long:    `Command 'random' gives you a random joke in the terminal.`,
+	Use:   "random",
+	Short: "Returns a random joke",
+	Long:  `Command 'random' gives you a random joke in the terminal.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println()
 		getRandomJoke()
