@@ -17,7 +17,12 @@ func main() {
 }
 
 func output() {
-	sourceFile := "../api/docs.yaml"
+	sourceFileWithChanges := "../api/docs.yaml"
+	sourceFileWithoutChanges := "../api/no-changes.yaml"
+	fmt.Println("Source file with changes: ", sourceFileWithChanges)
+	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
+
+	sourceFile := sourceFileWithoutChanges
 	destinationFile := "../api/resources-api-docs.yaml"
 
 	data, err := ioutil.ReadFile(sourceFile)
@@ -30,8 +35,6 @@ func output() {
 		log.Fatalf("Failed to read destination file before copy: %v", err)
 	}
 
-	fmt.Printf("---Content of %s before:\n%s\n", destinationFile, string(destDataBefore))
-
 	err = ioutil.WriteFile(destinationFile, data, 0644)
 	if err != nil {
 		log.Fatalf("Failed to write to destination file: %v", err)
@@ -42,7 +45,6 @@ func output() {
 		log.Fatalf("Failed to read destination file after copy: %v", err)
 	}
 
-	fmt.Printf("---Content of %s after:\n%s\n", destinationFile, string(destDataAfter))
 	fmt.Println("---Simulation complete.")
 	if string(destDataBefore) == string(destDataAfter) {
 		fmt.Println("No changes detected in API specification.")
