@@ -1,0 +1,24 @@
+name: check if API specification is up-to-date
+
+on:
+  merge_group:
+    branches:
+      - "main"
+  pull_request_target:
+    branches:
+      - "main"
+  push:
+    branches:
+      - "main"
+
+jobs:
+  compare-api-specification:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory:  .
+    steps:
+      - name: Check out the repository to the runner
+        uses: actions/checkout@v4
+      - name: Check for changes in API specification
+        run: make build-api
