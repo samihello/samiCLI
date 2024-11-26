@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Sami API
+  title: Sami API 2
   version: 0.1.0
 servers:
   - url: https://api.sample.com/v1
