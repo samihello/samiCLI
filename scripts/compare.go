@@ -31,11 +31,11 @@ func compare() {
 
 	if hashBefore != hashAfter {
 		fmt.Println()
-		log.Fatalf("Detected API specification changes. Please run api/build.go script locally and commit the changes.")
+		log.Fatalf("API specification is not in sync. Detected differences. Please run the api/build/main.go script locally and commit the updated API specification.")
 		fmt.Println()
 	} else {
 		fmt.Println()
-		fmt.Println("API specification file has not changed")
+		fmt.Println("API specification file has not changed.")
 		fmt.Println()
 	}
 }
