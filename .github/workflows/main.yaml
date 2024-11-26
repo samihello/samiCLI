@@ -25,10 +25,13 @@ jobs:
       - name: Check for changes in API specification
         id: check_changes
         run: |
-          if git ls-files -m | grep resources-api-docs.yaml; then
+          FILE_NAME="resources-api-docs.yaml"
+          if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
+            echo "Changes detected in $FILE_NAME."
           else
             echo "file_found=false" >> $GITHUB_ENV
+          echo "No changes detected in $FILE_NAME."
           fi
         continue-on-error: true
       - name: Fail if file is found (API specification is not up-to-date)
@@ -36,4 +39,4 @@ jobs:
         run: echo "API specification is not up-to-date. Run build script locally and commit the changes." && exit 1
       - name: Continue if file is not found (no changes in API specification)
         if: env.file_found == 'false'
-        run: echo "No changes in resources-api-docs.yaml"
+        run: echo "No uncommitted changes. You are awesome!"
