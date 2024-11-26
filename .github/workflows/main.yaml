@@ -20,5 +20,7 @@ jobs:
     steps:
       - name: Check out the repository to the runner
         uses: actions/checkout@v4
-      - name: Check for changes in API specification
+      - name: Run compile and bundle script
         run: make build-api
+      - name: Check for changes in API specification
+        run: git ls-files -m | grep resources-api-docs.yaml
