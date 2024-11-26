@@ -10,7 +10,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("Simulating compile and bundle of API specifications...")
 	fmt.Println("(script by Anders in api/build/main.go)")
-	fmt.Println("...by copying content to to trigger a delta/change in API spec.")
+	fmt.Println("...by copying content to trigger a delta/change in API spec.")
 	fmt.Println()
 
 	output()
@@ -22,6 +22,7 @@ func output() {
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
+	//sourceFile := sourceFileWithChanges
 	sourceFile := sourceFileWithoutChanges
 	destinationFile := "../api/resources-api-docs.yaml"
 
