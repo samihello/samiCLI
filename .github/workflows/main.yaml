@@ -1,13 +1,14 @@
 name: check if API specification is up-to-date
 
+#TODO should be 'master' for collections
 on:
-  merge_group:
+  merge_group: #TODO remove this part for collections?
     branches:
       - "main"
   pull_request_target:
     branches:
       - "main"
-  push:
+  push: #TODO remove this part for collections?
     branches:
       - "main"
 
