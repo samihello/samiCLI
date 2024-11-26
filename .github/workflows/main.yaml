@@ -30,15 +30,18 @@ jobs:
         run: |
           if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
-            echo "Changes detected in $FILE_NAME."
+            echo "Changes detected in $FILE_NAME"
           else
             echo "file_found=false" >> $GITHUB_ENV
-          echo "No changes detected in $FILE_NAME."
+            echo "No changes detected in $FILE_NAME"
           fi
         continue-on-error: true
       - name: Fail if file is found (API specification is not up-to-date)
         if: env.file_found == 'true'
-        run: echo "API specification $FILE_NAME is not up-to-date. Run build script locally and commit the changes." && exit 1
+        run: |
+          echo "API specification $FILE_NAME is not up-to-date. 
+          *** Run api spec build script locally and commit the changes! ***"
+          exit 1
       - name: Continue if file is not found (no changes in API specification)
         if: env.file_found == 'false'
         run: echo "No uncommitted changes in $FILE_NAME. You are awesome!"
