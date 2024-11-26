@@ -1,8 +1,9 @@
-build: compile bundle-yaml
+build: compile #bundle-yaml
 
 .PHONY: compile
 compile:
-	go run ../scripts/build.go
+	go run ../scripts/main.go
+	#go run ../scripts/build.go
 
 .PHONY: bundle-yaml
 bundle-yaml:
