@@ -3,7 +3,7 @@ build: compile #bundle-yaml
 .PHONY: compile
 compile:
 	go run ../scripts/main.go
-	#go run ../scripts/build.go
+	#do not run#go run ../scripts/build.go
 
 .PHONY: bundle-yaml
 bundle-yaml:

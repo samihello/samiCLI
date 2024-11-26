@@ -20,5 +20,20 @@ jobs:
     steps:
       - name: Check out the repository to the runner
         uses: actions/checkout@v4
-      - name: Check for changes in API specification
+      - name: Run compile and bundle script
         run: make build-api
+      - name: Check for changes in API specification
+        id: check_changes
+        run: |
+          if git ls-files -m | grep resources-api-docs.yaml; then
+            echo "::set-output name=file_found::true"
+          else
+            echo "::set-output name=file_found::false"
+          fi
+        continue-on-error: true
+      - name: Fail if file is found (API specification is not up-to-date)
+        if: steps.check_changes.outputs.file_found == 'true'
+        run: exit 1
+      - name: Continue if file is not found (no changes in API specification)
+        if: steps.check_changes.outputs.file_found == 'false'
+        run: echo "No changes in resources-api-docs.yaml"
