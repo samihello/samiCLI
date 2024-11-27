@@ -22,9 +22,13 @@ func output() {
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
-	//sourceFile := sourceFileWithChanges
-	sourceFile := sourceFileWithoutChanges
+	sourceFile := sourceFileWithChanges
+	//sourceFile := sourceFileWithoutChanges
+
+	fmt.Println()
+	fmt.Println("Using source file: ", sourceFile)
 	destinationFile := "../api/resources-api-docs.yaml"
+	fmt.Println()
 
 	data, err := ioutil.ReadFile(sourceFile)
 	if err != nil {
@@ -47,6 +51,7 @@ func output() {
 	}
 
 	fmt.Println("---Simulation complete.")
+	fmt.Println()
 	if string(destDataBefore) == string(destDataAfter) {
 		fmt.Println("No changes detected in API specification.")
 	} else {
