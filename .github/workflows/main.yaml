@@ -2,13 +2,7 @@ name: check if API specification is up-to-date
 
 #TODO should be 'master' for collections
 on:
-  merge_group: #TODO remove this part for collections?
-    branches:
-      - "main"
   pull_request_target:
-    branches:
-      - "main"
-  push: #TODO remove this part for collections?
     branches:
       - "main"
 
@@ -26,23 +20,26 @@ jobs:
         uses: actions/checkout@v4
       - name: Run compile and bundle script
         run: make build-api
-      - name: Check for changes in API specification
+      - name: Check for uncommitted changes in API specification
         id: check_changes
         run: |
           if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
-            echo "Changes detected in $FILE_NAME"
+            echo "File has been found. This means:"
+            echo "There are uncommitted changes in $FILE_NAME"
           else
             echo "file_found=false" >> $GITHUB_ENV
-            echo "No changes detected in $FILE_NAME"
+            echo "File has not been found. This means:"
+            echo "No uncommitted changes in $FILE_NAME"
           fi
         continue-on-error: true
-      - name: Fail if file is found (API specification is not up-to-date)
+      - name: Fail if file is found (API specification not up-to-date)
         if: env.file_found == 'true'
         run: |
-          echo "API specification $FILE_NAME is not up-to-date. 
-          *** Run api spec build script locally and commit the changes! ***"
+          echo "API specification is not up-to-date. 
+          *** Run API spec build script locally and commit the changes! ***"
+          echo "File: $FILE_NAME
           exit 1
-      - name: Continue if file is not found (no changes in API specification)
+      - name: Continue if file is not found (no changes)
         if: env.file_found == 'false'
         run: echo "No uncommitted changes in $FILE_NAME. You are awesome!"
