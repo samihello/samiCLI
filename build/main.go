@@ -13,18 +13,22 @@ func main() {
 	fmt.Println("...by copying content to trigger a delta/change in API spec.")
 	fmt.Println()
 
-	output()
+	simulateCompileAndBundle()
 }
 
-func output() {
-	sourceFileWithChanges := "../api/docs.yaml"
+func simulateCompileAndBundle() {
+	sourceFileWithChanges := "../api/with-changes.yaml"
 	sourceFileWithoutChanges := "../api/no-changes.yaml"
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
 	//sourceFile := sourceFileWithChanges
 	sourceFile := sourceFileWithoutChanges
+
+	fmt.Println()
+	fmt.Println("Using source file: ", sourceFile)
 	destinationFile := "../api/resources-api-docs.yaml"
+	fmt.Println()
 
 	data, err := ioutil.ReadFile(sourceFile)
 	if err != nil {
@@ -46,7 +50,6 @@ func output() {
 		log.Fatalf("Failed to read destination file after copy: %v", err)
 	}
 
-	fmt.Println("---Simulation complete.")
 	if string(destDataBefore) == string(destDataAfter) {
 		fmt.Println("No changes detected in API specification.")
 	} else {
