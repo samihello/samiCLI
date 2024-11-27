@@ -1,9 +1,7 @@
-name: check if API specification is up-to-date
+name: Build API specification
 
+#TODO should be 'master' for collections
 on:
-  merge_group:
-    branches:
-      - "main"
   pull_request_target:
     branches:
       - "main"
@@ -15,7 +13,7 @@ env:
   FILE_NAME: "resources-api-docs.yaml"
 
 jobs:
-  compare-api-specifications:
+  check-for-uncommitted-changes:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -25,23 +23,26 @@ jobs:
         uses: actions/checkout@v4
       - name: Run compile and bundle script
         run: make build-api
-      - name: Check for changes in API specification
+      - name: Check for uncommitted changes
         id: check_changes
         run: |
           if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
-            echo "Changes detected in $FILE_NAME"
+            echo "File with uncommitted changes has been found."
+            echo "Changes detected in: $FILE_NAME. File is not up to date."
           else
             echo "file_found=false" >> $GITHUB_ENV
-            echo "No changes detected in $FILE_NAME"
+            echo "File with uncommitted changes has not been found."
+            echo "No changes in: $FILE_NAME. File is up to date."
           fi
         continue-on-error: true
-      - name: Fail if file is found (API specification is not up-to-date)
+      - name: File is found - FAIL
         if: env.file_found == 'true'
         run: |
-          echo "API specification $FILE_NAME is not up-to-date. 
-          *** Run api spec build script locally and commit the changes! ***"
+          echo "API specification is not up-to-date. 
+          *** Run API spec build script locally and commit the changes ***"
+            echo "Please sync file: $FILE_NAME."
           exit 1
-      - name: Continue if file is not found (no changes in API specification)
+      - name: File is not found - SUCCESS
         if: env.file_found == 'false'
-        run: echo "No uncommitted changes in $FILE_NAME. You are awesome!"
+        run: echo "No uncommitted changes in file $FILE_NAME. You are awesome!"

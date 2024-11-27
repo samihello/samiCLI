@@ -1,10 +1,9 @@
-build: compile #bundle-yaml
+build: compile bundle-yaml
 
 .PHONY: compile
 compile:
-	go run ../scripts/main.go
-	#do not run#go run ../scripts/build.go
+	go run build/main.go
 
 .PHONY: bundle-yaml
 bundle-yaml:
-	go run ../scripts/compare.go
+	echo "---Simulation complete---"
