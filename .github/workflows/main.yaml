@@ -11,6 +11,7 @@ on:
   push: #TODO remove this part for collections?
     branches:
       - "main"
+      - "test"
 
 env:
   FILE_NAME: "resources-api-docs.yaml"

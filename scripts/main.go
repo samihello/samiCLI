@@ -24,6 +24,8 @@ func output() {
 
 	sourceFile := sourceFileWithChanges
 	//sourceFile := sourceFileWithoutChanges
+
+	fmt.Println("Using source file: ", sourceFile)
 	destinationFile := "../api/resources-api-docs.yaml"
 
 	data, err := ioutil.ReadFile(sourceFile)
