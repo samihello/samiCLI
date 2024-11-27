@@ -7,10 +7,10 @@ on:
       - "main"
   push:
     branches:
-      - "main"
+      - "*"
 
 env:
-  FILE_NAME: "resources-api-docs.yaml"
+  FILE_NAME: "api/resources-api-docs.yaml"
 
 jobs:
   check-for-uncommitted-changes:
@@ -21,8 +21,16 @@ jobs:
     steps:
       - name: Check out repository to runner
         uses: actions/checkout@v4
+
+      - name: Log contents BEFORE script
+        run: cat $FILE_NAME
+
       - name: Run compile and bundle script
         run: make build-api
+
+      - name: Log contents AFTER script
+        run: cat $FILE_NAME
+
       - name: Check for uncommitted changes
         id: check_changes
         run: |
@@ -36,6 +44,7 @@ jobs:
             echo "No changes in: $FILE_NAME. File is up to date."
           fi
         continue-on-error: true
+
       - name: File is found - FAIL
         if: env.file_found == 'true'
         run: |
@@ -43,6 +52,7 @@ jobs:
           *** Run API spec build script locally and commit the changes ***"
             echo "Please sync file: $FILE_NAME."
           exit 1
+
       - name: File is not found - SUCCESS
         if: env.file_found == 'false'
         run: echo "No uncommitted changes in file $FILE_NAME. You are awesome!"
