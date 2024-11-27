@@ -50,11 +50,12 @@ func output() {
 		log.Fatalf("Failed to read destination file after copy: %v", err)
 	}
 
-	fmt.Println("---Simulation complete.")
 	if string(destDataBefore) == string(destDataAfter) {
 		fmt.Println("No changes detected in API specification.")
 	} else {
 		fmt.Println("Changes detected in API specification.")
 	}
+	fmt.Println()
+	fmt.Println("---Simulation complete.")
 	fmt.Println()
 }

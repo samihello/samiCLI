@@ -5,9 +5,6 @@ on:
   pull_request_target:
     branches:
       - "main"
-  push:
-    branches:
-      - "main"
 
 env:
   FILE_NAME: "resources-api-docs.yaml"
@@ -29,11 +26,11 @@ jobs:
           if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
             echo "File with uncommitted changes has been found."
-            echo "File is not up to date: $FILE_NAME"
+            echo "$FILE_NAME is not up to date and should be synced.
           else
             echo "file_found=false" >> $GITHUB_ENV
             echo "File with uncommitted changes has not been found."
-            echo "File is up to date: $FILE_NAME"
+            echo "No changes in $FILE_NAME. File is up to date."
           fi
         continue-on-error: true
       - name: Fail if file is found (API specification not up-to-date)
