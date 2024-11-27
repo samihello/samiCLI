@@ -6,4 +6,4 @@ compile:
 
 .PHONY: bundle-yaml
 bundle-yaml:
-	echo "Simulation complete."
+	echo "---Simulation complete!"
