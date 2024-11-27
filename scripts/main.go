@@ -22,8 +22,8 @@ func output() {
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
-	//sourceFile := sourceFileWithChanges
-	sourceFile := sourceFileWithoutChanges
+	sourceFile := sourceFileWithChanges
+	//sourceFile := sourceFileWithoutChanges
 
 	fmt.Println()
 	fmt.Println("Using source file: ", sourceFile)
