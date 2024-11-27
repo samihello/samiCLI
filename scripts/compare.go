@@ -12,15 +12,15 @@ func main() {
 }
 
 func compare() {
-	// calculate the SHA hash of file in api/docs.yaml
-	filePathAfter := "../api/docs.yaml"
+	// calculate the SHA hash of file in api/with-changes.yaml
+	filePathAfter := "../api/with-changes.yaml"
 	hashAfter, err := calculateFileHash(filePathAfter)
 	if err != nil {
 		log.Fatalf("Failed to calculate hash: %v", err)
 	}
 
-	// calculate the SHA hash of file in root docs.yaml
-	filePathBefore := "../docs.yaml"
+	// calculate the SHA hash of file in root with-changes.yaml
+	filePathBefore := "../with-changes.yaml"
 	hashBefore, err := calculateFileHash(filePathBefore)
 	if err != nil {
 		log.Fatalf("Failed to calculate hash: %v", err)

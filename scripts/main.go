@@ -17,7 +17,7 @@ func main() {
 }
 
 func output() {
-	sourceFileWithChanges := "../api/docs.yaml"
+	sourceFileWithChanges := "../api/with-changes.yaml"
 	sourceFileWithoutChanges := "../api/no-changes.yaml"
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
@@ -27,7 +27,7 @@ func output() {
 
 	fmt.Println()
 	fmt.Println("Using source file: ", sourceFile)
-	destinationFile := "../api/resources-api-docs.yaml"
+	destinationFile := "../api/resources-api-with-changes.yaml"
 	fmt.Println()
 
 	data, err := ioutil.ReadFile(sourceFile)

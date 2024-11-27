@@ -7,7 +7,7 @@ on:
       - "main"
 
 env:
-  FILE_NAME: "resources-api-docs.yaml"
+  FILE_NAME: "resources-api-with-changes.yaml"
 
 jobs:
   check-for-uncommitted-changes:
