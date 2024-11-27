@@ -20,8 +20,8 @@ func simulateCompileAndBundle() {
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
-	//sourceFile := sourceFileWithChanges
-	sourceFile := sourceFileWithoutChanges
+	sourceFile := sourceFileWithChanges
+	///sourceFile := sourceFileWithoutChanges
 
 	fmt.Println()
 	fmt.Println("Using source file: ", sourceFile)
@@ -43,6 +43,7 @@ func simulateCompileAndBundle() {
 		log.Fatalf("Failed to read destination file before copy: %v", err)
 	}
 
+	// Copy the source file to the destination file
 	err = ioutil.WriteFile(destinationFile, data, 0644)
 	if err != nil {
 		log.Fatalf("Failed to write to destination file: %v", err)
