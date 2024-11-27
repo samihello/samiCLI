@@ -8,22 +8,29 @@ import (
 
 func main() {
 	fmt.Println()
-	fmt.Println("Simulating compile and bundle of API specifications...")
-	fmt.Println("(script by Anders in api/build/main.go)")
-	fmt.Println("...by copying content to trigger a delta/change in API spec.")
+	fmt.Println("---Simulating compile and bundle of API specifications---")
 	fmt.Println()
 
-	output()
+	simulateCompileAndBundle()
 }
 
-func output() {
-	sourceFileWithChanges := "../api/docs.yaml"
-	sourceFileWithoutChanges := "../api/no-changes.yaml"
+func simulateCompileAndBundle() {
+	sourceFileWithChanges := "dist/compiled/with-changes.yaml"
+	sourceFileWithoutChanges := "dist/compiled/no-changes.yaml"
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
 	//sourceFile := sourceFileWithChanges
 	sourceFile := sourceFileWithoutChanges
+
+	fmt.Println()
+	fmt.Println("Using source file: ", sourceFile)
+	if sourceFile == sourceFileWithChanges {
+		fmt.Println("---Simulating changes in API specification---")
+	} else {
+		fmt.Println("---Simulating no changes in API specification---")
+	}
+	fmt.Println()
 	destinationFile := "../api/resources-api-docs.yaml"
 
 	data, err := ioutil.ReadFile(sourceFile)
@@ -31,25 +38,27 @@ func output() {
 		log.Fatalf("Failed to read source file: %v", err)
 	}
 
-	destDataBefore, err := ioutil.ReadFile(destinationFile)
+	before, err := ioutil.ReadFile(destinationFile)
 	if err != nil {
 		log.Fatalf("Failed to read destination file before copy: %v", err)
 	}
 
+	// Copy the source file to the destination file
 	err = ioutil.WriteFile(destinationFile, data, 0644)
 	if err != nil {
 		log.Fatalf("Failed to write to destination file: %v", err)
 	}
 
-	destDataAfter, err := ioutil.ReadFile(destinationFile)
+	after, err := ioutil.ReadFile(destinationFile)
 	if err != nil {
 		log.Fatalf("Failed to read destination file after copy: %v", err)
 	}
 
-	fmt.Println("---Simulation complete.")
-	if string(destDataBefore) == string(destDataAfter) {
+	if string(before) == string(after) {
+		fmt.Println()
 		fmt.Println("No changes detected in API specification.")
 	} else {
+		fmt.Println()
 		fmt.Println("Changes detected in API specification.")
 	}
 	fmt.Println()
