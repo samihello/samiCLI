@@ -1,10 +1,10 @@
 name: check if API specification is up-to-date
 
-
+#TODO should be 'master' for collections
 on:
   pull_request_target:
     branches:
-      - "main" #TODO should be 'master' for collections
+      - "main"
 
 env:
   FILE_NAME: "resources-api-docs.yaml"

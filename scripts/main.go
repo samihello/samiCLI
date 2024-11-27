@@ -51,7 +51,6 @@ func output() {
 	}
 
 	fmt.Println("---Simulation complete.")
-	fmt.Println()
 	if string(destDataBefore) == string(destDataAfter) {
 		fmt.Println("No changes detected in API specification.")
 	} else {
