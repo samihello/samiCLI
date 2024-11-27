@@ -20,7 +20,7 @@ func simulateCompileAndBundle() {
 	fmt.Println("Source file with changes: ", sourceFileWithChanges)
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
-	//sourceFile := sourceFileWithChanges
+	///sourceFile := sourceFileWithChanges
 	sourceFile := sourceFileWithoutChanges
 
 	fmt.Println()
