@@ -5,9 +5,6 @@ on:
   pull_request_target:
     branches:
       - "main"
-  push: #TODO remove for collections
-    branches:
-      - "*"
 
 env:
   FILE_NAME: "resources-api-docs.yaml"
