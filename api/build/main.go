@@ -38,24 +38,33 @@ func simulateCompileAndBundle() {
 		log.Fatalf("Failed to read source file: %v", err)
 	}
 
-	destDataBefore, err := ioutil.ReadFile(destinationFile)
+	before, err := ioutil.ReadFile(destinationFile)
 	if err != nil {
 		log.Fatalf("Failed to read destination file before copy: %v", err)
 	}
+	fmt.Println()
+	fmt.Println("API spec before:")
+	fmt.Println(string(before))
 
+	// Copy the source file to the destination file
 	err = ioutil.WriteFile(destinationFile, data, 0644)
 	if err != nil {
 		log.Fatalf("Failed to write to destination file: %v", err)
 	}
 
-	destDataAfter, err := ioutil.ReadFile(destinationFile)
+	after, err := ioutil.ReadFile(destinationFile)
 	if err != nil {
 		log.Fatalf("Failed to read destination file after copy: %v", err)
 	}
+	fmt.Println()
+	fmt.Println("API spec after:")
+	fmt.Println(string(after))
 
-	if string(destDataBefore) == string(destDataAfter) {
+	if string(before) == string(after) {
+		fmt.Println()
 		fmt.Println("No changes detected in API specification.")
 	} else {
+		fmt.Println()
 		fmt.Println("Changes detected in API specification.")
 	}
 	fmt.Println()
