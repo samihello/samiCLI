@@ -8,9 +8,8 @@ import (
 
 func main() {
 	fmt.Println()
-	fmt.Println("Simulating compile and bundle of API specifications...")
+	fmt.Println("---Simulating compile and bundle of API specifications...")
 	fmt.Println("(script by Anders in api/build/main.go)")
-	fmt.Println("...by copying content to trigger a delta/change in API spec.")
 	fmt.Println()
 
 	simulateCompileAndBundle()
@@ -27,6 +26,9 @@ func simulateCompileAndBundle() {
 
 	fmt.Println()
 	fmt.Println("Using source file: ", sourceFile)
+	if sourceFile == sourceFileWithChanges {
+		fmt.Println("---Simulating changes in API specification...")
+	}
 	destinationFile := "../api/resources-api-docs.yaml"
 	fmt.Println()
 
