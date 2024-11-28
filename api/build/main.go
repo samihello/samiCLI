@@ -21,7 +21,7 @@ func simulateCompileAndBundle() {
 	fmt.Println("Source file without changes: ", sourceFileWithoutChanges)
 
 	sourceFile := sourceFileWithChanges
-	//sourceFile := sourceFileWithoutChanges
+	////sourceFile := sourceFileWithoutChanges
 
 	fmt.Println()
 	fmt.Println("Using source file: ", sourceFile)
