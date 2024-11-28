@@ -2,7 +2,7 @@ name: Build API specification
 
 #TODO should be 'master' for collections
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - "main"
   push:
