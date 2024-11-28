@@ -1,10 +1,9 @@
 name: Build API specification
 
-#TODO should be 'master' for collections
 on:
   pull_request:
     branches:
-      - "main"
+      - "main" #TODO
 
 env:
   FILE_NAME: "api/resources-api-docs.yaml"
@@ -19,13 +18,13 @@ jobs:
       - name: Check out repository to runner
         uses: actions/checkout@v4
 
-      - name: Log contents BEFORE script
+      - name: Log contents before script
         run: cat $FILE_NAME
 
       - name: Run compile and bundle script
         run: make build-api
 
-      - name: Log contents AFTER script
+      - name: Log contents after script
         run: cat $FILE_NAME
 
       - name: Check for uncommitted changes
@@ -34,22 +33,23 @@ jobs:
           if git ls-files -m | grep $FILE_NAME; then
             echo "file_found=true" >> $GITHUB_ENV
             echo "File with uncommitted changes has been found."
-            echo "Changes detected in: $FILE_NAME. File is not up to date."
+            echo "Changes detected in: $FILE_NAME"
+            echo "File is not up to date."
           else
             echo "file_found=false" >> $GITHUB_ENV
             echo "File with uncommitted changes has not been found."
-            echo "No changes in: $FILE_NAME. File is up to date."
+            echo "No changes in: $FILE_NAME"
+            echo "File is up to date."
           fi
         continue-on-error: true
 
-      - name: File is found - FAIL
+      - name: File found - FAIL
         if: env.file_found == 'true'
         run: |
-          echo "API specification is not up-to-date. 
+          echo "API specification is not up-to-date. Please sync file: $FILE_NAME.
           *** Run API spec build script locally and commit the changes ***"
-            echo "Please sync file: $FILE_NAME."
           exit 1
 
-      - name: File is not found - SUCCESS
+      - name: File not found - SUCCESS
         if: env.file_found == 'false'
-        run: echo "No uncommitted changes in file $FILE_NAME. You are awesome!"
+        run: echo "No uncommitted changes in $FILE_NAME. You are awesome!"
